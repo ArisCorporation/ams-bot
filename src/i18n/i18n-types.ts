@@ -365,6 +365,26 @@ export type TranslationFunctions = {
 			 * Tell us about yourself!
 			 */
 			MODAL_INPUT_APPLICATION_PLACEHOLDER: () => LocalizedString
+			/**
+			 * application
+			 */
+			CHANNEL_PREFIX: () => LocalizedString
+			/**
+			 * Application from {name}
+			 */
+			APPLICATION_PREFIX: () => LocalizedString
+			/**
+			 * Accept
+			 */
+			ACCEPT: () => LocalizedString
+			/**
+			 * Reject
+			 */
+			REJECT: () => LocalizedString
+			/**
+			 * Your application has been successfully submitted!
+			 */
+			APPLICATION_SUCCESS: () => LocalizedString
 		}
 	}
 }

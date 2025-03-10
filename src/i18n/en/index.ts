@@ -71,6 +71,11 @@ const en = {
 			MODAL_INPUT_HANDLER: 'Handler',
 			MODAL_INPUT_APPLICATION: 'Application',
 			MODAL_INPUT_APPLICATION_PLACEHOLDER: 'Tell us about yourself!',
+			CHANNEL_PREFIX: 'application',
+			APPLICATION_PREFIX: 'Application from',
+			ACCEPT: 'Accept',
+			REJECT: 'Reject',
+			APPLICATION_SUCCESS: 'Application successfully submitted!',
 		},
 	},
 } satisfies BaseTranslation
