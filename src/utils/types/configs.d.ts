@@ -91,3 +91,10 @@ type APIConfigType = {
 	enabled: boolean
 	port: number
 }
+
+type ArisCorpConfigType = {
+	roles: {
+		foundersgroup: string
+		management: string
+	}
+}
