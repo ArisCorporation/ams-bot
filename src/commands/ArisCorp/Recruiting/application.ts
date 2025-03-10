@@ -3,7 +3,7 @@ import { ButtonInteraction, CommandInteraction, ModalSubmitInteraction, TextChan
 import { Client, ComponentOptions, Guard } from "discordx";
 import { ButtonComponent, Discord, ModalComponent, Slash } from "@/decorators";
 import { sendApplicationModal, processApplication } from "./application-function";
-import { ExtractLocale } from '@/guards';
+import { GuildOnly } from '@/guards';
 import { L, getLocaleFromInteraction } from '@/i18n'
 import { env } from '@/env';
 
@@ -44,7 +44,7 @@ export default class ApplicationCommand {
   }
 
   @Slash({ name: "application" })
-  @Guard(ExtractLocale)
+  @Guard(GuildOnly)
   async application(
     interaction: CommandInteraction,
     client: Client,
@@ -54,7 +54,6 @@ export default class ApplicationCommand {
   }
 
   @ModalComponent({ id: "applicationModal" } as ComponentOptions)
-  @Guard(ExtractLocale)
   async applicationForm(
     interaction: ModalSubmitInteraction,
   ): Promise<void> {

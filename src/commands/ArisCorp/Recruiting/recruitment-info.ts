@@ -4,15 +4,15 @@ import { Client, Guard } from 'discordx';
 import { ButtonComponent, Discord, Slash } from '@/decorators';
 import { getColor } from '@/utils/functions';
 import { sendApplicationModal } from './application-function';
-import { UserPermissions, ExtractLocale } from '@/guards';
+import { UserPermissions, GuildOnly } from '@/guards';
 import { L, getLocaleFromInteraction } from '@/i18n'
 
 @Discord()
 @Category('Admin')
 export default class RecruitmentInfoCommand {
-  
+
   @ButtonComponent({ id: 'addApplication' })
-  @Guard(ExtractLocale)
+  @Guard(GuildOnly)
   async handleApplicationButton (
     interaction: ButtonInteraction,
     client: Client,
@@ -22,8 +22,8 @@ export default class RecruitmentInfoCommand {
   }
 
   @Slash({ name: 'recruitment-info' })
-  @Guard(ExtractLocale)
-	@Guard(UserPermissions(['Administrator']))
+  @Guard(UserPermissions(['Administrator']))
+  @Guard(GuildOnly)
   async recruitmentInfo (
     interaction: CommandInteraction,
     client: Client
