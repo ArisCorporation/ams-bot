@@ -70,15 +70,15 @@ export default class PingCommand {
 	}
 
 	@ModalComponent({ id: 'applicationModal' } as ComponentOptions)
-	async applicationForm(interaction: ModalSubmitInteraction): Promise<void> {
+	async applicationForm(interaction: ModalSubmitInteraction, { localize }: InteractionData): Promise<void> {
 		// Retrieve values from the modal
 		const [name, handle, application] = ['modalNameInput', 'modalHandleInput', 'modalApplicationInput'].map(id => interaction.fields.getTextInputValue(id))
 
 		// Create a new text channel for the application
 		const channel = await interaction.guild?.channels.create({
-			name: `bewerbung-${name}`,
+			name: `${localize.COMMANDS.APPLICATION.CHANNEL_PREFIX()}-${name}`,
 			type: ChannelType.GuildText,
-			topic: `Bewerbung von ${name} (${handle})`,
+			topic: `${localize.COMMANDS.APPLICATION.APPLICATION_PREFIX()} ${name}`,
 			permissionOverwrites: [
 				{
 					id: interaction.guild.roles.everyone.id,
@@ -110,13 +110,18 @@ export default class PingCommand {
 				url: 'https://ams.ariscorp.de',
 				iconURL: 'https://cms.ariscorp.de/assets/cb368123-74a3-4021-bb70-2fffbcdd05fa',
 			})
-			.setTitle(`Bewerbung von ${name}`)
+			.setTitle(`${localize.COMMANDS.APPLICATION.APPLICATION_PREFIX()} ${name}`)
 			.setDescription(application)
 			.addFields(
 				{
 					name: 'RSI Handle',
-					value: handle ? handle.trim() : 'Nicht angegeben',
-					inline: false,
+					value: handle ? handle.trim() : 'N/A',
+					inline: true,
+				},
+				{
+					name: 'Discord Name',
+					value: interaction.user.username,
+					inline: true,
 				}
 			)
 			.setThumbnail('https://cms.ariscorp.de/assets/3090187e-6348-4290-a878-af1b2b48c114')
@@ -131,11 +136,11 @@ export default class PingCommand {
 		const actionRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
 			new ButtonBuilder()
 				.setCustomId('acceptApplication')
-				.setLabel('Annehmen')
+				.setLabel(localize.COMMANDS.APPLICATION.ACCEPT())
 				.setStyle(ButtonStyle.Success),
 			new ButtonBuilder()
 				.setCustomId('rejectApplication')
-				.setLabel('Ablehnen')
+				.setLabel(localize.COMMANDS.APPLICATION.REJECT())
 				.setStyle(ButtonStyle.Danger)
 		)
 
@@ -143,7 +148,7 @@ export default class PingCommand {
 		await applicationChannel.send({ embeds: [applicationEmbed], components: [actionRow] })
 
 		// Acknowledge the modal submission with an ephemeral reply.
-		await interaction.reply({ content: 'Deine Bewerbung wurde erfolgreich eingereicht!', ephemeral: true })
+		await interaction.reply({ content: localize.COMMANDS.APPLICATION.APPLICATION_SUCCESS(), ephemeral: true })
 	}
 
 }
