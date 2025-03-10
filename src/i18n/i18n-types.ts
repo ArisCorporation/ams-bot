@@ -8,9 +8,6 @@ export type BaseLocale = 'en'
 export type Locales =
 	| 'de'
 	| 'en'
-	| 'fr'
-	| 'ru'
-	| 'uk'
 
 export type Translation = RootTranslation
 
@@ -89,7 +86,7 @@ type RootTranslation = {
 			EMBED: {
 				/**
 				 * P​r​e​f​i​x​ ​c​h​a​n​g​e​d​ ​t​o​ ​`​{​p​r​e​f​i​x​}​`​.
-				 * @param {string} prefix
+				 * @param {unknown} prefix
 				 */
 				DESCRIPTION: RequiredParams<'prefix'>
 			}
@@ -102,7 +99,7 @@ type RootTranslation = {
 			EMBED: {
 				/**
 				 * M​a​i​n​t​e​n​a​n​c​e​ ​m​o​d​e​ ​s​e​t​ ​t​o​ ​`​{​s​t​a​t​e​}​`​.
-				 * @param {string} state
+				 * @param {unknown} state
 				 */
 				DESCRIPTION: RequiredParams<'state'>
 			}
@@ -143,7 +140,7 @@ type RootTranslation = {
 				TITLE: string
 				/**
 				 * {​c​a​t​e​g​o​r​y​}​ ​C​o​m​m​a​n​d​s
-				 * @param {string} category
+				 * @param {unknown} category
 				 */
 				CATEGORY_TITLE: RequiredParams<'category'>
 			}
@@ -154,7 +151,7 @@ type RootTranslation = {
 				TITLE: string
 				/**
 				 * {​c​a​t​e​g​o​r​y​}​ ​c​o​m​m​a​n​d​s
-				 * @param {string} category
+				 * @param {unknown} category
 				 */
 				CATEGORY_DESCRIPTION: RequiredParams<'category'>
 			}
@@ -166,9 +163,9 @@ type RootTranslation = {
 			DESCRIPTION: string
 			/**
 			 * {​m​e​m​b​e​r​}​ ​P​o​n​g​!​ ​T​h​e​ ​m​e​s​s​a​g​e​ ​r​o​u​n​d​-​t​r​i​p​ ​t​o​o​k​ ​{​t​i​m​e​}​m​s​.​{​h​e​a​r​t​b​e​a​t​}
-			 * @param {string} heartbeat
-			 * @param {string} member
-			 * @param {number} time
+			 * @param {unknown} heartbeat
+			 * @param {unknown} member
+			 * @param {unknown} time
 			 */
 			MESSAGE: RequiredParams<'heartbeat' | 'member' | 'time'>
 		}
@@ -229,7 +226,7 @@ type RootTranslation = {
 			 * H​e​l​l​o​ ​e​v​e​r​y​o​n​e​ ​a​t​ ​A​r​i​s​C​o​r​p​,​
 		​
 		​w​e​ ​h​a​v​e​ ​<​@​{​u​s​e​r​_​i​d​}​>​ ​a​s​ ​n​e​w​ ​a​p​p​l​i​c​a​n​t​!
-			 * @param {string} user_id
+			 * @param {unknown} user_id
 			 */
 			ANNOUNCE_APPLICANT: RequiredParams<'user_id'>
 		}
@@ -319,7 +316,7 @@ export type TranslationFunctions = {
 				/**
 				 * Prefix changed to `{prefix}`.
 				 */
-				DESCRIPTION: (arg: { prefix: string }) => LocalizedString
+				DESCRIPTION: (arg: { prefix: unknown }) => LocalizedString
 			}
 		}
 		MAINTENANCE: {
@@ -331,7 +328,7 @@ export type TranslationFunctions = {
 				/**
 				 * Maintenance mode set to `{state}`.
 				 */
-				DESCRIPTION: (arg: { state: string }) => LocalizedString
+				DESCRIPTION: (arg: { state: unknown }) => LocalizedString
 			}
 		}
 		STATS: {
@@ -371,7 +368,7 @@ export type TranslationFunctions = {
 				/**
 				 * {category} Commands
 				 */
-				CATEGORY_TITLE: (arg: { category: string }) => LocalizedString
+				CATEGORY_TITLE: (arg: { category: unknown }) => LocalizedString
 			}
 			SELECT_MENU: {
 				/**
@@ -381,7 +378,7 @@ export type TranslationFunctions = {
 				/**
 				 * {category} commands
 				 */
-				CATEGORY_DESCRIPTION: (arg: { category: string }) => LocalizedString
+				CATEGORY_DESCRIPTION: (arg: { category: unknown }) => LocalizedString
 			}
 		}
 		PING: {
@@ -392,7 +389,7 @@ export type TranslationFunctions = {
 			/**
 			 * {member} Pong! The message round-trip took {time}ms.{heartbeat}
 			 */
-			MESSAGE: (arg: { heartbeat: string, member: string, time: number }) => LocalizedString
+			MESSAGE: (arg: { heartbeat: unknown, member: unknown, time: unknown }) => LocalizedString
 		}
 		APPLICATION: {
 			/**
@@ -452,7 +449,7 @@ export type TranslationFunctions = {
 	
 		we have <@{user_id}> as new applicant!
 			 */
-			ANNOUNCE_APPLICANT: (arg: { user_id: string }) => LocalizedString
+			ANNOUNCE_APPLICANT: (arg: { user_id: unknown }) => LocalizedString
 		}
 		APPLICATION_INFO: {
 			/**

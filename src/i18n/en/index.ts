@@ -32,13 +32,13 @@ const en = {
 				},
 			},
 			EMBED: {
-				DESCRIPTION: 'Prefix changed to `{prefix:string}`.',
+				DESCRIPTION: 'Prefix changed to `{prefix}`.',
 			},
 		},
 		MAINTENANCE: {
 			DESCRIPTION: 'Set the maintenance mode of the bot.',
 			EMBED: {
-				DESCRIPTION: 'Maintenance mode set to `{state:string}`.',
+				DESCRIPTION: 'Maintenance mode set to `{state}`.',
 			},
 		},
 		STATS: {
@@ -54,16 +54,16 @@ const en = {
 			DESCRIPTION: 'Get global help about the bot and its commands',
 			EMBED: {
 				TITLE: 'Help panel',
-				CATEGORY_TITLE: '{category:string} Commands',
+				CATEGORY_TITLE: '{category} Commands',
 			},
 			SELECT_MENU: {
 				TITLE: 'Select a category',
-				CATEGORY_DESCRIPTION: '{category:string} commands',
+				CATEGORY_DESCRIPTION: '{category} commands',
 			},
 		},
 		PING: {
 			DESCRIPTION: 'Pong!',
-			MESSAGE: '{member:string} Pong! The message round-trip took {time:number}ms.{heartbeat:string}',
+			MESSAGE: '{member} Pong! The message round-trip took {time}ms.{heartbeat}',
 		},
 		APPLICATION: {
 			MODAL_TITLE: 'Application',
@@ -81,7 +81,7 @@ const en = {
 			REJECTED_MESSAGE: 'You have been rejected as an applicant!',
 			ANNOUNCE_APPLICANT: `Hello everyone at ArisCorp,
 
-we have <@{user_id:string}> as new applicant!`,
+we have <@{user_id}> as new applicant!`,
 		},
 		APPLICATION_INFO: {
 			INFO: 'N/A',

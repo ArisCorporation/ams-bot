@@ -32,13 +32,13 @@ const de = {
 				},
 			},
 			EMBED: {
-				DESCRIPTION: 'Prefix geändert zu `{prefix:string}`.',
+				DESCRIPTION: 'Prefix geändert zu `{prefix}`.',
 			},
 		},
 		MAINTENANCE: {
 			DESCRIPTION: 'Setze den Wartungsmodus des Bots.',
 			EMBED: {
-				DESCRIPTION: 'Wartungsmodus gesetzt auf `{state:string}`.',
+				DESCRIPTION: 'Wartungsmodus gesetzt auf `{state}`.',
 			},
 		},
 		STATS: {
@@ -54,16 +54,16 @@ const de = {
 			DESCRIPTION: 'Bekomme die globale Hilfe über den Bot und seine Befehle',
 			EMBED: {
 				TITLE: 'Hilfe Panel',
-				CATEGORY_TITLE: '{category:string} Commands',
+				CATEGORY_TITLE: '{category} Commands',
 			},
 			SELECT_MENU: {
 				TITLE: 'Wähle eine Kategorie',
-				CATEGORY_DESCRIPTION: '{category:string} commands',
+				CATEGORY_DESCRIPTION: '{category} commands',
 			},
 		},
 		PING: {
 			DESCRIPTION: 'Pong!',
-			MESSAGE: '{member:string} Pong! Die Antwort hat {time:number}ms.{heartbeat:string} gebraucht',
+			MESSAGE: '{member} Pong! Die Antwort hat {time}ms.{heartbeat} gebraucht',
 		},
 		APPLICATION: {
 			MODAL_TITLE: 'Bewerbung',
@@ -80,7 +80,9 @@ const de = {
 			ACCEPTED_MESSAGE: `**Herzlichen Glückwunsch, deine Bewerbung wurde angenommen!
 Willkommen in der ArisCorp!**`,
 			REJECTED_MESSAGE: 'Leider wurde deine Bewerbung abgelehnt.',
-			ANNOUNCE_APPLICANT: `Hallo an alle Mitarbeiter der ArisCorp,\n\nwir haben <@{user_id}> als neuen Anwärter gewonnen. Heißt ihn herzlich willkommen!`,
+			ANNOUNCE_APPLICANT: `Hallo an alle Mitarbeiter der ArisCorp,
+
+wir haben <@{user_id}> als neuen Anwärter gewonnen. Heißt ihn herzlich willkommen!`,
 		},
 		APPLICATION_INFO: {
 			INFO: `🎚️ • Benutzung:

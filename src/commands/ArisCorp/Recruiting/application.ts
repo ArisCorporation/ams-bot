@@ -30,7 +30,7 @@ export default class ApplicationCommand {
       // Send a message to the internal channel
       const internalChannel = interaction.guild?.channels.cache.get(env.ARISCORP_INTERNAL_CHANNEL_ID) as TextChannel
       internalChannel?.send(L[getLocaleFromInteraction(interaction)].COMMANDS.APPLICATION.ANNOUNCE_APPLICANT({
-        user_id: member?.id
+        user_id: member?.id || ""
       }))
     } catch (error) {
       console.error(error)
