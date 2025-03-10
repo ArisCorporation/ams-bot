@@ -7,8 +7,8 @@ function allInteractionsLocaleDetector(interaction: AllInteractions) {
 	return () => {
 		let locale = resolveLocale(interaction)
 
-		if (['en-US', 'en-GB'].includes(locale))
-			locale = 'en'
+		if (['de-DE'].includes(locale))
+			locale = 'de'
 		else if (locale === 'default')
 			locale = generalConfig.defaultLocale
 

@@ -68,6 +68,7 @@ const en = {
 		APPLICATION: {
 			MODAL_TITLE: 'Application',
 			MODAL_INPUT_NAME: 'Name',
+			MODAL_INPUT_REAL_NAME: 'Real Name',
 			MODAL_INPUT_HANDLER: 'Handler',
 			MODAL_INPUT_APPLICATION: 'Application',
 			MODAL_INPUT_APPLICATION_PLACEHOLDER: 'Tell us about yourself!',
@@ -76,6 +77,15 @@ const en = {
 			ACCEPT: 'Accept',
 			REJECT: 'Reject',
 			APPLICATION_SUCCESS: 'Application successfully submitted!',
+			ACCEPTED_MESSAGE: 'You have been accepted as an applicant!',
+			REJECTED_MESSAGE: 'You have been rejected as an applicant!',
+			ANNOUNCE_APPLICANT: `Hello everyone at ArisCorp,
+
+we have <@{user_id:string}> as new applicant!`,
+		},
+		APPLICATION_INFO: {
+			INFO: 'N/A',
+			BUTTON_APPLY: 'Apply',
 		},
 	},
 } satisfies BaseTranslation

@@ -115,7 +115,7 @@ const resolvers = {
 		StringSelectMenuInteraction: (interaction: StringSelectMenuInteraction) => interaction.locale,
 		ModalSubmitInteraction: (interaction: ModalSubmitInteraction) => interaction.locale,
 
-		fallback: (_: any) => 'en',
+		fallback: (_: any) => 'de',
 	},
 }
 

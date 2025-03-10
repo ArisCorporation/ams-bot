@@ -12,6 +12,9 @@ export const env = cleanEnv(process.env, {
 	BOT_OWNER_ID: str(),
 	FOUNDERS_ROLE_ID: str(),
 	MANAGEMENT_ROLE_ID: str(),
+	APPLICANT_ROLE_ID: str(),
+	BOT_ROLE_ID: str(),
+	ARISCORP_INTERNAL_CHANNEL_ID: str(),
 
 	DATABASE_HOST: str({ default: undefined }),
 	DATABASE_PORT: num({ default: undefined }),
