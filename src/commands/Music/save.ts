@@ -9,17 +9,12 @@ import { getColor } from '@/utils/functions'
 
 @Discord()
 @Category('General')
-export default class MusicLoopCommand {
+export default class MusicSaveCommand {
 
-	@Slash({ name: 'loop', description: 'Wiederhole das Lied oder die Warteschlange' })
+	@Slash({ name: 'save', description: 'Speichere dir das aktuelle Lied' })
 
 	@Guard(GuildOnly)
-	async loopHandler(
-		@SlashChoice({ name: 'Queue', value: 'enable_loop_queue' })
-		@SlashChoice({ name: 'Disable', value: 'disable_loop' })
-		@SlashChoice({ name: 'Song', value: 'enable_loop_song' })
-		@SlashChoice({ name: 'Autoplay', value: 'enable_autoplay' })
-		@SlashOption({ name: 'action', type: ApplicationCommandOptionType.String, required: true }) action: string,
+	async saveHandler(
 			interaction: CommandInteraction,
 			client: Client,
 			{ localize }: InteractionData

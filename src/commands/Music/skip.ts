@@ -9,12 +9,12 @@ import { getColor } from '@/utils/functions'
 
 @Discord()
 @Category('General')
-export default class MusicHistoryCommand {
+export default class MusicSkipCommand {
 
-	@Slash({ name: 'history', description: 'Spiele vorheriges Lied ab' })
+	@Slash({ name: 'skip', description: 'Spiele das nächste Lied ab' })
 
 	@Guard(GuildOnly)
-	async historyHandler(
+	async skipHandler(
 		interaction: CommandInteraction,
 		client: Client
 	) {
@@ -22,21 +22,14 @@ export default class MusicHistoryCommand {
 		await interaction.deferReply()
 
 		const queue = useQueue(interaction.guild || '')
+		if (!queue?.isPlaying()) return interaction.editReply({ content: `❌ Aktuell wird keine Musik abgespielt <${interaction.member}...` })
 
-		if (!queue || queue.history.tracks.toArray().length === 0) return interaction.editReply({ content: 'Bisher wurde noch keine Musik gespielt' })
+		if (!queue.history.nextTrack) return interaction.editReply({ content: `❌ Es gibt kein nächstes Lied <${interaction.member}...` })
 
-		const tracks = queue.history.tracks.toArray()
+		await queue.history.next()
 
-		const description = tracks
-			.slice(0, 20)
-			.map((track, index) => {
-				return `**${index + 1}.** [${track.title}](${track.url}) von **${track.author}**`
-			})
-			.join('\r\n\r\n')
-
-		const historyEmbed = new EmbedBuilder()
-			.setTitle(`Verlauf`)
-			.setDescription(description)
+		const embed = new EmbedBuilder()
+			.setAuthor({ name: await `✅ Spiele nächstes Lied...` })
 			.setColor(getColor('primary'))
 			.setFooter({
 				text: 'ArisCorp Management System',
@@ -44,7 +37,7 @@ export default class MusicHistoryCommand {
 			})
 			.setTimestamp()
 
-		interaction.editReply({ embeds: [historyEmbed] })
+		interaction.editReply({ embeds: [embed] })
 	}
 
 }

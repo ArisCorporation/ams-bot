@@ -22,14 +22,14 @@ export default class MusicBackCommand {
 		await interaction.deferReply()
 
 		const queue = useQueue(interaction.guild || '')
-		if (!queue?.isPlaying()) return interaction.editReply({ content: `Aktuell wird keine Musik abgespielt <${interaction.member}>... <❌>` })
+		if (!queue?.isPlaying()) return interaction.editReply({ content: `❌ Aktuell wird keine Musik abgespielt <${interaction.member}...` })
 
-		if (!queue.history.previousTrack) return interaction.editReply({ content: `Es gibt kein vorheriges Lied <${interaction.member}>... <❌>` })
+		if (!queue.history.previousTrack) return interaction.editReply({ content: `❌ Es gibt kein vorheriges Lied <${interaction.member}...` })
 
 		await queue.history.back()
 
 		const backEmbed = new EmbedBuilder()
-			.setAuthor({ name: await `Spiele vorheriges Lied.. <✅>` })
+			.setAuthor({ name: await `✅ Spiele vorheriges Lied...` })
 			.setColor(getColor('primary'))
 			.setFooter({
 				text: 'ArisCorp Management System',

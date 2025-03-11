@@ -10,15 +10,15 @@ import { getColor } from '@/utils/functions'
 
 @Discord()
 @Category('General')
-export default class MusicClearCommand {
+export default class MusicPlayCommand {
 
 	@Slash({ name: 'play', description: 'Spiele ein Song ab' })
 	@Guard(GuildOnly)
-	async playHandler(
-    @SlashOption({ name: 'song', type: ApplicationCommandOptionType.String, required: true }) song: string,
-    	interaction: CommandInteraction,
-    	client: Client,
-    	{ localize }: InteractionData
+	async playHandler (
+		@SlashOption({ name: 'song', type: ApplicationCommandOptionType.String, required: true }) song: string,
+		interaction: CommandInteraction,
+		client: Client,
+		{ localize }: InteractionData
 	) {
 		// Defer the reply immediately to prevent timeouts
 		await interaction.deferReply()
@@ -31,7 +31,11 @@ export default class MusicClearCommand {
 			searchEngine: QueryType.AUTO,
 		})
 
-		const defaultEmbed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
+			.setAuthor({
+				name: "Zur Warteschlange hinzugefügt:",
+				iconURL: interaction.user.displayAvatarURL({ size: 1024 })
+			})
 			.setColor(getColor('primary'))
 			.setFooter({
 				text: 'ArisCorp Management System',
@@ -39,9 +43,9 @@ export default class MusicClearCommand {
 			})
 
 		if (!res?.tracks.length) {
-			defaultEmbed.setAuthor({ name: 'Keine Ergebnisse gefunden' })
+			embed.setAuthor({ name: 'Keine Ergebnisse gefunden' })
 
-			return interaction.editReply({ embeds: [defaultEmbed] })
+			return interaction.editReply({ embeds: [embed] })
 		}
 
 		try {
@@ -59,19 +63,39 @@ export default class MusicClearCommand {
 					},
 				})
 
-				defaultEmbed.setAuthor({ name: `Lied <${track.title}> zur Warteschlange hinzugefügt <✅>`, iconURL: track.thumbnail })
+				embed
+					.setTitle(track.title)
+					.setURL(track.url)
+					.setThumbnail(track.thumbnail)
+					.setFields([
+						{
+							name: "🎤 Interpreter",
+							value: track.author,
+							inline: false
+						},
+						{
+							name: "▶️ Länge",
+							value: `${track.duration} Minuten`,
+							inline: true
+						},
+						{
+							name: "🎚️ Abgespielt von",
+							value: `<@${interaction.user.id || ''}>`,
+							inline: true
+						}
+					])
 
-				return interaction.editReply({ embeds: [defaultEmbed] })
+				return interaction.editReply({ embeds: [embed] })
 			} else {
-				defaultEmbed.setAuthor({ name: 'Du bist nicht in einem Sprachkanal' })
+				embed.setAuthor({ name: 'Du bist nicht in einem Sprachkanal' })
 
-				return interaction.editReply({ embeds: [defaultEmbed] })
+				return interaction.editReply({ embeds: [embed] })
 			}
 		} catch (error) {
 			console.error(`Play error: ${error}`)
-			defaultEmbed.setAuthor({ name: 'Ich kann dem Kanal nich beitreten' })
+			embed.setAuthor({ name: 'Ich kann dem Kanal nich beitreten' })
 
-			return interaction.editReply({ embeds: [defaultEmbed] })
+			return interaction.editReply({ embeds: [embed] })
 		}
 	}
 
