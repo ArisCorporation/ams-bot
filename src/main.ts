@@ -8,12 +8,14 @@ import { RequestContext } from '@mikro-orm/core'
 import chalk from 'chalk'
 import chokidar from 'chokidar'
 import discordLogs from 'discord-logs'
+import { Player, PlayerInitOptions } from 'discord-player'
+import { YoutubeiExtractor } from 'discord-player-youtubei'
 import { Client, DIService, MetadataStorage, tsyringeDependencyRegistryEngine } from 'discordx'
 import { container } from 'tsyringe'
 import { constructor } from 'tsyringe/dist/typings/types'
 
 import { Server } from '@/api/server'
-import { apiConfig, generalConfig } from '@/configs'
+import { apiConfig, generalConfig, musicConfig } from '@/configs'
 import { keptInstances } from '@/decorators'
 import { checkEnvironmentVariables, env } from '@/env'
 import { NoBotTokenError } from '@/errors'
@@ -118,6 +120,12 @@ async function init() {
 	// init the client
 	DIService.engine = tsyringeDependencyRegistryEngine.setInjector(container)
 	const client = new Client(clientConfig())
+
+	// init the player
+	const player = new Player(client, musicConfig.discordPlayer as PlayerInitOptions)
+
+	// register the player instance
+	player.extractors.register(YoutubeiExtractor, {})
 
 	// Load all new events
 	discordLogs(client, { debug: false })
