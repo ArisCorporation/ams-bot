@@ -19,7 +19,7 @@ import { apiConfig, generalConfig, musicConfig } from '@/configs'
 import { keptInstances } from '@/decorators'
 import { checkEnvironmentVariables, env } from '@/env'
 import { NoBotTokenError } from '@/errors'
-import { Database, ErrorHandler, EventManager, ImagesUpload, Logger, PluginsManager, Store } from '@/services'
+import { Database, ErrorHandler, EventManager, Logger, PluginsManager, Store } from '@/services'
 import { initDataTable, resolveDependency } from '@/utils/functions'
 
 import { clientConfig } from './client'
@@ -167,12 +167,6 @@ async function init() {
 				if (apiConfig.enabled) {
 					const server = await resolveDependency(Server)
 					await server.start()
-				}
-
-				// upload images to imgur if configured
-				if (env.IMGUR_CLIENT_ID && generalConfig.automaticUploadImagesToImgur) {
-					const imagesUpload = await resolveDependency(ImagesUpload)
-					await imagesUpload.syncWithDatabase()
 				}
 
 				const store = await container.resolve(Store)
