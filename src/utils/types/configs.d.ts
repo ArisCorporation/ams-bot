@@ -98,3 +98,25 @@ type ArisCorpConfigType = {
 		management: string
 	}
 }
+
+type MusicConfigType = {
+	DJ: {
+		enabled: boolean
+		roleName: string
+		commands: string[]
+	}
+	Translate_Timeout: number
+	maxVol: number
+	spotifyBridge: boolean
+	volume: number
+	leaveOnEmpty: boolean
+	leaveOnEmptyCooldown: number
+	leaveOnEnd: boolean
+	leaveOnEndCooldown: number
+	discordPlayer: {
+		ytdlOptions: {
+			quality: string
+			highWaterMark: number
+		}
+	}
+}
