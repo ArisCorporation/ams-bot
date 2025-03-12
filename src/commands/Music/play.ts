@@ -2,10 +2,12 @@ import { Category } from '@discordx/utilities'
 import { ApplicationCommandOptionType, CommandInteraction, EmbedBuilder, GuildMember, TextChannel } from 'discord.js'
 import { QueryType, useMainPlayer } from 'discord-player'
 import { Client, Guard } from 'discordx'
+import { container } from 'tsyringe'
 
 import { musicConfig } from '@/configs'
 import { Discord, Slash, SlashOption } from '@/decorators'
 import { GuildOnly } from '@/guards'
+import { Logger } from '@/services'
 import { getColor } from '@/utils/functions'
 
 @Discord()
@@ -23,6 +25,9 @@ export default class MusicPlayCommand {
 		// Defer the reply immediately to prevent timeouts
 		await interaction.deferReply()
 
+		const logger = await container.resolve(Logger)
+		logger.log(`Starte Suche nach: ${song}`, 'info')
+
 		const player = useMainPlayer()
 		const member = interaction.member as GuildMember
 
@@ -30,6 +35,13 @@ export default class MusicPlayCommand {
 			requestedBy: member,
 			searchEngine: QueryType.AUTO,
 		})
+
+		if (!res?.tracks.length) {
+			logger.log(`Keine Ergebnisse gefunden für: ${song}`, 'warn')
+
+			// Fehlerbehandlung...
+			return interaction.editReply({ embeds: [/* ... */] })
+		}
 
 		const embed = new EmbedBuilder()
 			.setAuthor({
@@ -62,6 +74,7 @@ export default class MusicPlayCommand {
 						leaveOnEndCooldown: musicConfig.leaveOnEndCooldown,
 					},
 				})
+				logger.log(`Song gestartet: ${track.title}`, 'info')
 
 				embed
 					.setTitle(track.title)
@@ -92,11 +105,13 @@ export default class MusicPlayCommand {
 
 				return interaction.editReply({ embeds: [embed] })
 			} else {
+				logger.log('Benutzer ist nicht in einem Sprachkanal', 'warn')
 				embed.setAuthor({ name: 'Du bist nicht in einem Sprachkanal' })
 
 				return interaction.editReply({ embeds: [embed] })
 			}
 		} catch (error) {
+			logger.log(`Play error: ${error}`, 'error')
 			console.error(`Play error: ${error}`)
 			embed.setAuthor({ name: 'Ich kann dem Kanal nich beitreten' })
 
