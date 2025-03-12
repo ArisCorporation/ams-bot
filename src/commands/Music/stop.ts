@@ -1,10 +1,9 @@
 import { Category } from '@discordx/utilities'
-import { ApplicationCommandOptionType, CommandInteraction, EmbedBuilder, GuildMember, TextChannel } from 'discord.js'
-import { QueryType, useMainPlayer, useQueue } from 'discord-player'
+import { CommandInteraction, EmbedBuilder } from 'discord.js'
+import { useQueue } from 'discord-player'
 import { Client, Guard } from 'discordx'
 
-import { musicConfig } from '@/configs'
-import { Discord, Slash, SlashOption } from '@/decorators'
+import { Discord, Slash } from '@/decorators'
 import { GuildOnly } from '@/guards'
 import { getColor } from '@/utils/functions'
 
@@ -14,7 +13,7 @@ export default class MusicStopCommand {
 
 	@Slash({ name: 'stop', description: 'Stoppe die Musikwiedergabe' })
 	@Guard(GuildOnly)
-	async stopHandler (
+	async stopHandler(
 		interaction: CommandInteraction,
 		client: Client,
 		{ localize }: InteractionData
@@ -28,7 +27,7 @@ export default class MusicStopCommand {
 		queue.delete()
 
 		const embed = new EmbedBuilder()
-			.setAuthor({ name: '✅ Musik gestoppt!' })
+			.setAuthor({ name: ':white_check_mark: Musik gestoppt!' })
 			.setColor(getColor('primary'))
 			.setFooter({
 				text: 'ArisCorp Management System',

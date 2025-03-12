@@ -28,7 +28,7 @@ export default class MusicLoopCommand {
 		await interaction.deferReply()
 
 		const queue = useQueue(interaction.guild || '')
-		const errorMessage = await `❌ Es ist ein Fehler aufgetreten <${interaction.member}>...`
+		const errorMessage = await `:x: Es ist ein Fehler aufgetreten <${interaction.member}>...`
 		const baseEmbed = new EmbedBuilder()
 			.setColor(getColor('primary'))
 			.setFooter({
@@ -37,30 +37,30 @@ export default class MusicLoopCommand {
 			})
 			.setTimestamp()
 
-			if (!queue?.isPlaying()) return interaction.editReply({ content: `❌ Aktuell wird keine Musik abgespielt <${interaction.member}>...` })
+		if (!queue?.isPlaying()) return interaction.editReply({ content: `:x: Aktuell wird keine Musik abgespielt <${interaction.member}>...` })
 
 		// @ts-expect-error
 		switch (interaction.options._hoistedOptions.map(x => x.value).toString()) {
 			case 'enable_loop_queue': {
-				if (queue.repeatMode === QueueRepeatMode.TRACK) return interaction.editReply({ content: `❌ Der Schleifenmodus ist bereits aktiviert! ${interaction.member}` })
+				if (queue.repeatMode === QueueRepeatMode.TRACK) return interaction.editReply({ content: `:x: Der Schleifenmodus ist bereits aktiviert! ${interaction.member}` })
 
 				queue.setRepeatMode(QueueRepeatMode.QUEUE)
-				baseEmbed.setAuthor({ name: queue.repeatMode === QueueRepeatMode.QUEUE ? await `Der Schleifenmodus wurde auf die gesamte Warteschlange angewendet (🔁)` : errorMessage })
+				baseEmbed.setAuthor({ name: queue.repeatMode === QueueRepeatMode.QUEUE ? await `Der Schleifenmodus wurde auf die gesamte Warteschlange angewendet (:repeat:)` : errorMessage })
 
 				return interaction.editReply({ embeds: [baseEmbed] })
 			}
 
 			case 'disable_loop': {
-				if (queue.repeatMode === QueueRepeatMode.OFF) return interaction.editReply({ content: await `❌ Der Schleifenmodus ist bereits deaktiviert! ${interaction.member}` })
+				if (queue.repeatMode === QueueRepeatMode.OFF) return interaction.editReply({ content: await `:x: Der Schleifenmodus ist bereits deaktiviert! ${interaction.member}` })
 
 				queue.setRepeatMode(QueueRepeatMode.OFF)
-				baseEmbed.setAuthor({ name: await `Der Schleifenmodus wurde deaktiviert (🔁)` })
+				baseEmbed.setAuthor({ name: await `Der Schleifenmodus wurde deaktiviert (:repeat:)` })
 
 				return interaction.editReply({ embeds: [baseEmbed] })
 			}
 
 			case 'enable_loop_song': {
-				if (queue.repeatMode === QueueRepeatMode.QUEUE) return interaction.editReply({ content: `❌ Der Schleifenmodus ist bereits aktiviert! ${interaction.member}` })
+				if (queue.repeatMode === QueueRepeatMode.QUEUE) return interaction.editReply({ content: `:x: Der Schleifenmodus ist bereits aktiviert! ${interaction.member}` })
 
 				queue.setRepeatMode(QueueRepeatMode.TRACK)
 				baseEmbed.setAuthor({ name: queue.repeatMode === QueueRepeatMode.TRACK ? `Der Schleifenmodus wurde auf das aktuelle Lied angewendet!` : errorMessage })
@@ -69,10 +69,10 @@ export default class MusicLoopCommand {
 			}
 
 			case 'enable_autoplay': {
-				if (queue.repeatMode === QueueRepeatMode.AUTOPLAY) return interaction.editReply({ content: `❌ Der Schleifenmodus ist bereits aktiviert! ${interaction.member}` })
+				if (queue.repeatMode === QueueRepeatMode.AUTOPLAY) return interaction.editReply({ content: `:x: Der Schleifenmodus ist bereits aktiviert! ${interaction.member}` })
 
 				queue.setRepeatMode(QueueRepeatMode.AUTOPLAY)
-				baseEmbed.setAuthor({ name: `Autoplay aktiviert. Die Warteschlange wird nun automatisch mit ähnlichen Liedern gefüllt (🔁)` })
+				baseEmbed.setAuthor({ name: `Autoplay aktiviert. Die Warteschlange wird nun automatisch mit ähnlichen Liedern gefüllt (:repeat:)` })
 
 				return interaction.editReply({ embeds: [baseEmbed] })
 			}

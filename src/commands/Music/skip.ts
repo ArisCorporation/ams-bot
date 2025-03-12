@@ -22,14 +22,14 @@ export default class MusicSkipCommand {
 		await interaction.deferReply()
 
 		const queue = useQueue(interaction.guild || '')
-		if (!queue?.isPlaying()) return interaction.editReply({ content: `❌ Aktuell wird keine Musik abgespielt <${interaction.member}...` })
+		if (!queue?.isPlaying()) return interaction.editReply({ content: `:x: Aktuell wird keine Musik abgespielt <${interaction.member}...` })
 
-		if (!queue.history.nextTrack) return interaction.editReply({ content: `❌ Es gibt kein nächstes Lied <${interaction.member}...` })
+		if (!queue.history.nextTrack) return interaction.editReply({ content: `:x: Es gibt kein nächstes Lied <${interaction.member}...` })
 
 		await queue.history.next()
 
 		const embed = new EmbedBuilder()
-			.setAuthor({ name: await `✅ Spiele nächstes Lied...` })
+			.setAuthor({ name: await `:white_check_mark: Spiele nächstes Lied...` })
 			.setColor(getColor('primary'))
 			.setFooter({
 				text: 'ArisCorp Management System',

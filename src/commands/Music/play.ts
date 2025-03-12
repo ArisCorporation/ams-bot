@@ -14,11 +14,11 @@ export default class MusicPlayCommand {
 
 	@Slash({ name: 'play', description: 'Spiele ein Song ab' })
 	@Guard(GuildOnly)
-	async playHandler (
+	async playHandler(
 		@SlashOption({ name: 'song', type: ApplicationCommandOptionType.String, required: true }) song: string,
-		interaction: CommandInteraction,
-		client: Client,
-		{ localize }: InteractionData
+			interaction: CommandInteraction,
+			client: Client,
+			{ localize }: InteractionData
 	) {
 		// Defer the reply immediately to prevent timeouts
 		await interaction.deferReply()
@@ -33,8 +33,8 @@ export default class MusicPlayCommand {
 
 		const embed = new EmbedBuilder()
 			.setAuthor({
-				name: "Zur Warteschlange hinzugefügt:",
-				iconURL: interaction.user.displayAvatarURL({ size: 1024 })
+				name: 'Zur Warteschlange hinzugefügt:',
+				iconURL: interaction.user.displayAvatarURL({ size: 1024 }),
 			})
 			.setColor(getColor('primary'))
 			.setFooter({
@@ -69,20 +69,25 @@ export default class MusicPlayCommand {
 					.setThumbnail(track.thumbnail)
 					.setFields([
 						{
-							name: "🎤 Interpreter",
+							name: ':microphone: Interpreter',
 							value: track.author,
-							inline: false
+							inline: false,
 						},
 						{
-							name: "▶️ Länge",
+							name: ':hourglass: Länge',
 							value: `${track.duration} Minuten`,
-							inline: true
+							inline: true,
 						},
 						{
-							name: "🎚️ Abgespielt von",
+							name: ':eyes: Aufrufe',
+							value: `\`${Number(track.views).toLocaleString()}\``,
+							inline: true,
+						},
+						{
+							name: ':control_knobs: Abgespielt von',
 							value: `<@${interaction.user.id || ''}>`,
-							inline: true
-						}
+							inline: true,
+						},
 					])
 
 				return interaction.editReply({ embeds: [embed] })

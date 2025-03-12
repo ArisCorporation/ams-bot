@@ -17,7 +17,7 @@ export default class MusicTrackAddEvent {
 		client: Client
 	) {
 		const embed = new EmbedBuilder()
-			.setAuthor({ name: await `Lied <${track.title}> zur Warteschlange hinzugefügt <✅>`, iconURL: track.thumbnail })
+			.setAuthor({ name: await `Lied <${track.title}> zur Warteschlange hinzugefügt <:white_check_mark:>`, iconURL: track.thumbnail })
 			.setColor(getColor('primary'))
 			.setFooter({
 				text: 'ArisCorp Management System',
