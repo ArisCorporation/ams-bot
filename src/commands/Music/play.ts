@@ -31,6 +31,16 @@ export default class MusicPlayCommand {
 		const player = useMainPlayer()
 		const member = interaction.member as GuildMember
 
+		player.on('error', (error) => {
+  // Nutze hier deinen Logger, um den Fehler zu protokollieren
+  container.resolve(Logger).log(`Player error event: ${error.message}`, 'error');
+});
+
+player.on('playerError', (error, track) => {
+  const trackInfo = track?.title || 'UNKNOWN TITLE';
+  container.resolve(Logger).log(`Player error for track ${trackInfo}: ${error.message}`, 'error');
+});
+
 		const res = await player.search(song, {
 			requestedBy: member,
 			searchEngine: QueryType.AUTO,
