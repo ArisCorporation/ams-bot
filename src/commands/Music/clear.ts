@@ -1,12 +1,10 @@
 import { Category } from '@discordx/utilities'
-import { ButtonInteraction, CommandInteraction, EmbedBuilder, ModalSubmitInteraction, TextChannel } from 'discord.js'
+import { CommandInteraction, EmbedBuilder } from 'discord.js'
 import { useQueue } from 'discord-player'
 import { Client, ComponentOptions, Guard } from 'discordx'
 
-import { ButtonComponent, Discord, ModalComponent, Slash } from '@/decorators'
-import { env } from '@/env'
+import { Discord, Slash } from '@/decorators'
 import { GuildOnly } from '@/guards'
-import { getLocaleFromInteraction, L } from '@/i18n'
 import { getColor } from '@/utils/functions'
 
 @Discord()
@@ -24,9 +22,9 @@ export default class MusicClearCommand {
 		await interaction.deferReply()
 
 		const queue = useQueue(interaction.guild || '')
-		if (!queue?.isPlaying()) return interaction.editReply({ content: `❌ Aktuell wird keine Musik abgespielt ${interaction.member}...` })
+		if (!queue?.isPlaying()) return interaction.editReply({ content: `:x: Aktuell wird keine Musik abgespielt ${interaction.member}...` })
 
-		if (!queue.tracks.toArray()[1]) return interaction.editReply({ content: `❌ Es gibt keine weiteren Lieder in der Warteschlange ${interaction.member}...` })
+		if (!queue.tracks.toArray()[1]) return interaction.editReply({ content: `:x: Es gibt keine weiteren Lieder in der Warteschlange ${interaction.member}...` })
 
 		await queue.tracks.clear()
 

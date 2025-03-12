@@ -23,7 +23,7 @@ export default class MusicHistoryCommand {
 
 		const queue = useQueue(interaction.guild || '')
 
-		if (!queue || queue.history.tracks.toArray().length === 0) return interaction.editReply({ content: 'Bisher wurde noch keine Musik gespielt' })
+		if (!queue || queue.history.tracks.toArray().length === 0) return interaction.editReply({ content: ':x: Bisher wurde noch keine Musik gespielt' })
 
 		const tracks = queue.history.tracks.toArray()
 
