@@ -3,6 +3,7 @@ import 'dotenv/config'
 
 import process from 'node:process'
 
+import { AttachmentExtractor, ReverbnationExtractor, SoundCloudExtractor, SpotifyExtractor } from '@discord-player/extractor'
 import { resolve } from '@discordx/importer'
 import { RequestContext } from '@mikro-orm/core'
 import chalk from 'chalk'
@@ -124,8 +125,17 @@ async function init() {
 	// init the player
 	const player = new Player(client, musicConfig.discordPlayer as PlayerInitOptions)
 
-	// register the player instance
-	player.extractors.register(YoutubeiExtractor, {})
+	// register the extractors
+	player.extractors.loadMulti([
+		AttachmentExtractor,
+		SpotifyExtractor,
+		SoundCloudExtractor,
+		ReverbnationExtractor,
+	])
+	// player.extractors.register(YoutubeiExtractor, {})
+	// player.extractors.register(AttachmentExtractor, {})
+	// player.extractors.register(SpotifyExtractor, {})
+	// player.extractors.register(SoundCloudExtractor, {})
 
 	// Load all new events
 	discordLogs(client, { debug: false })
