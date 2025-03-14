@@ -9,9 +9,8 @@ import chalk from 'chalk'
 import chokidar from 'chokidar'
 import discordLogs from 'discord-logs'
 import { Player, PlayerInitOptions } from 'discord-player'
-import { AttachmentExtractor, ReverbnationExtractor, SoundCloudExtractor, SpotifyExtractor } from '@discord-player/extractor'
 import { DeezerExtractor } from "discord-player-deezer"
-import TidalExtractor from "discord-player-tidal"
+
 import { Client, DIService, MetadataStorage, tsyringeDependencyRegistryEngine } from 'discordx'
 import { container } from 'tsyringe'
 import { constructor } from 'tsyringe/dist/typings/types'
