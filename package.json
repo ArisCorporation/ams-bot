@@ -63,6 +63,7 @@
     "discord-logs": "~2.2.1",
     "discord-oauth2": "~2.12.1",
     "discord-player": "^7.1.0",
+    "discord-player-deezer": "^2.5.0-beta.1",
     "discord-player-youtubei": "^1.4.2",
     "discord.js": "^14.18.0",
     "discordx": "~11.12.2",

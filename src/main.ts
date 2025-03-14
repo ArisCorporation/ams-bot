@@ -9,7 +9,9 @@ import chalk from 'chalk'
 import chokidar from 'chokidar'
 import discordLogs from 'discord-logs'
 import { Player, PlayerInitOptions } from 'discord-player'
-import { YoutubeiExtractor } from 'discord-player-youtubei'
+import { AttachmentExtractor, ReverbnationExtractor, SoundCloudExtractor, SpotifyExtractor } from '@discord-player/extractor'
+import { DeezerExtractor } from "discord-player-deezer"
+import TidalExtractor from "discord-player-tidal"
 import { Client, DIService, MetadataStorage, tsyringeDependencyRegistryEngine } from 'discordx'
 import { container } from 'tsyringe'
 import { constructor } from 'tsyringe/dist/typings/types'
@@ -125,7 +127,12 @@ async function init() {
 	const player = new Player(client, musicConfig.discordPlayer as PlayerInitOptions)
 
 	// register the player instance
-	player.extractors.register(YoutubeiExtractor, {})
+	// player.extractors.register(SoundCloudExtractor, {})
+
+	await player.extractors.register(DeezerExtractor, {
+		decryptionKey: "g4el58wc0zvf9na1",
+		arl: "b5d4ef623d6a5ad19ebf8d13b6105b31f4ad48afd7e9adf49f459eb47745fc0ff98b8b557a5ce813b3b016f3c78449750f964966b753dd37f58930ad9b0e40d9fa63489b406e5ca85f9a15bf1b3d2767e79977b0dd69fece379837528936877e",
+	});
 
 	// Load all new events
 	discordLogs(client, { debug: false })
