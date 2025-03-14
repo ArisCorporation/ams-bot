@@ -144,7 +144,12 @@ export async function processApplication(
 				name: 'Discord Name',
 				value: interaction.user.username,
 				inline: true,
-			}
+			},
+			{
+				name: 'Realer Name',
+				value: realName ?? 'N/A',
+				inline: true,
+			},
 		)
 		.setThumbnail('https://cms.ariscorp.de/assets/3090187e-6348-4290-a878-af1b2b48c114')
 		.setColor(getColor('primary'))

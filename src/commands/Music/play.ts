@@ -1,17 +1,19 @@
 import { Category } from '@discordx/utilities'
 import { ApplicationCommandOptionType, CommandInteraction, EmbedBuilder, GuildMember, TextChannel } from 'discord.js'
 import { QueryType, useMainPlayer } from 'discord-player'
+
 import { Client, Guard } from 'discordx'
 
 import { musicConfig } from '@/configs'
 import { Discord, Slash, SlashOption } from '@/decorators'
 import { GuildOnly } from '@/guards'
 import { getColor } from '@/utils/functions'
+const player = useMainPlayer()
 
 @Discord()
 @Category('General')
 export default class MusicPlayCommand {
-
+	
 	@Slash({ name: 'play', description: 'Spiele ein Song ab' })
 	@Guard(GuildOnly)
 	async playHandler(
@@ -23,7 +25,6 @@ export default class MusicPlayCommand {
 		// Defer the reply immediately to prevent timeouts
 		await interaction.deferReply()
 
-		const player = useMainPlayer()
 		const member = interaction.member as GuildMember
 
 		const res = await player.search(song, {

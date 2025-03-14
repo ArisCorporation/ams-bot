@@ -67,8 +67,8 @@ const de = {
 		},
 		APPLICATION: {
 			MODAL_TITLE: 'Bewerbung',
-			MODAL_INPUT_NAME: 'Name',
-			MODAL_INPUT_HANDLER: 'Handle',
+			MODAL_INPUT_NAME: 'Fiktiver Name',
+			MODAL_INPUT_HANDLER: 'RSI Handle',
 			MODAL_INPUT_APPLICATION: 'Bewerbung',
 			MODAL_INPUT_APPLICATION_PLACEHOLDER: 'Erzähle uns etwas über dich!',
 			CHANNEL_PREFIX: 'bewerbung',
@@ -76,7 +76,7 @@ const de = {
 			ACCEPT: 'Akzeptieren',
 			REJECT: 'Ablehnen',
 			APPLICATION_SUCCESS: 'Bewerbung erfolgreich eingereicht!',
-			MODAL_INPUT_REAL_NAME: 'Echter Name',
+			MODAL_INPUT_REAL_NAME: 'Realer Vorname',
 			ACCEPTED_MESSAGE: `**Herzlichen Glückwunsch, deine Bewerbung wurde angenommen!
 Willkommen in der ArisCorp!**`,
 			REJECTED_MESSAGE: 'Leider wurde deine Bewerbung abgelehnt.',
